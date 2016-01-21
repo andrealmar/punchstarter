@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block subtitle %}
-  {{ project.project_name }}
+  {{ project.name }}
 {% endblock %}
 
 
 {% block content %}
   <div class="row">
     <div class="col s12">
-      <h1 class="center-align">{{ project.project_name }}</h1>
+      <h1 class="center-align">{{ project.name }}</h1>
       <div class="center-align"> by {{ project.creator.first_name }} {{ project.creator.last_name }} </div>
     </div>
   </div>
@@ -34,7 +34,7 @@
       </div>
 
       <div class="card-panel teal white-text">
-        <span class="card-title">$ {{ project.total_pldeges }}</span> <br/> pledges of ${{ project.goal_amount }} goal
+        <span class="card-title">$ {{ project.total_pledges }} </span> <br/> pledged of ${{ project.goal_amount }} goal
       </div>
 
       <div class="card-panel teal white-text">
