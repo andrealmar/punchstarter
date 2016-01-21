@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+  {{ project.project_name }}
+{% endblock %}
+
+
+{% block content %}
+  <div class="row">
+    <div class="col s12">
+      <h1 class="center-align">{{ project.project_name }}</h1>
+      <div class="center-align"> by {{ project.creator.first_name }} {{ project.creator.last_name }} </div>
+    </div>
+  </div>
+
+  <div class="col s12" style="height:30px;"> </div>
+
+  <div class="row">
+    <div class="col s8">
+      <div class="panel">
+        <p class="center-align">{{ project.short_description }}</p>
+        <img class="img-responsive center-block" src="http://placehold.it/680x500" width="680" height="500">
+      </div>
+
+      <div>
+        <p class="center-align">{{ project.long_description }}</p>
+      </div>
+    </div>
+
+    <div class="col s4">
+
+      <div class="card-panel teal white-text">
+        <span class="card-title">{{ project.num_pledges }}</span> pledges
+      </div>
+
+      <div class="card-panel teal white-text">
+        <span class="card-title">$ {{ project.total_pldeges }}</span> <br/> pledges of ${{ project.goal_amount }} goal
+      </div>
+
+      <div class="card-panel teal white-text">
+        <span class="card-title">{{ project.num_days_left }}</span> days left
+      </div>
+
+      <div class="panel">
+        <a href="#" class="btn waves-effect waves-light">Pledge Now</a>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}
