@@ -1,4 +1,6 @@
 from punchstarterapp import db
+from sqlalchemy.sql import func
+import datetime
 
 class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -19,6 +21,25 @@ class Project(db.Model):
     time_end = db.Column(db.DateTime)
     time_created = db.Column(db.DateTime)
     pledges = db.relationship('Pledge', backref='project', foreign_keys='Pledge.project_id')
+
+    @property
+    def num_pledges(self):
+        return len(self.pledges)
+
+    @property
+    def total_pledges(self):
+        total_pledges = db.session.query(func.sum(Pledge.amount)).filter(Pledge.project_id == self.id).one()[0]
+        if total_pledges is None:
+            total_pledges = 0
+
+        return total_pledges
+
+    @property
+    def num_days_left(self):
+        now = datetime.datetime.now()
+        num_days_left = (self.time_end - now).days
+
+        return num_days_left
 
 class Pledge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
