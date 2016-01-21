@@ -42,7 +42,7 @@ def create():
         db.session.add(new_project)
         db.session.commit()
 
-        return redirect(url_for('create'))
+        return redirect(url_for('project_detail', project_id = new_project.id))
 
 @app.route("/projects/<int:project_id>")
 def project_detail(project_id):
