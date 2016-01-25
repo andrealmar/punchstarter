@@ -9,7 +9,7 @@
   <br><br>
   <!-- form beggining-->
   <div class="row">
-  <form class="col s12" method="POST" action="{{ url_for('create') }}">
+  <form class="col s12" method="POST" action="{{ url_for('create') }}" enctype="multipart/form-data">
     <div class="row">
       <div class="input-field col s6">
         <input id="project_name" type="text" class="validate", name="project_name">
@@ -26,6 +26,17 @@
       <div class="input-field col s6">
         <textarea id="long_description" class="materialize-textarea" rows="4" name="long_description"></textarea>
         <label for="long_description">Long Description</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="file-field input-field col s6">
+        <div class="btn">
+          <span>Cover Photo</span>
+          <input id="cover_photo" type="file" class="validate", name="cover_photo">
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
       </div>
     </div>
     <div class="row">
