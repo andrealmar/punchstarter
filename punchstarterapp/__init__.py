@@ -3,6 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 import datetime
+import cloudinary
 
 app = Flask(__name__)
 app.config.from_object('punchstarterapp.default_settings')
@@ -28,12 +29,23 @@ def create():
         time_end = request.form.get("funding_end_date")
         time_end = datetime.datetime.strptime(time_end, "%Y-%m-%d")
 
+        #Upload cover photo
+        cover_photo = request.files['cover_photo']
+        uploaded_image = cloudinary.uploader.upload(
+            cover_photo,
+            crop = 'limit',
+            width = 680,
+            height = 550
+        )
+        image_filename = uploaded_image["public_id"]
+
         new_project = Project (
             member_id = 1, #Guest Creator
             name = request.form.get("project_name"),
             short_description = request.form.get("short_description"),
             long_description = request.form.get("long_description"),
             goal_amount = request.form.get("funding_goal"),
+            image_filename = image_filename,
             time_starts = now,
             time_end = time_end,
             time_created = now,
