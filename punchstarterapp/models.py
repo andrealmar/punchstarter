@@ -45,7 +45,7 @@ class Project(db.Model):
 
     @property
     def image_path(self):
-        return cloudinary.utils.cloudinary_url.(self.image_filename)[0]
+        return cloudinary.utils.cloudinary_url(self.image_filename)[0]
 
 class Pledge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
