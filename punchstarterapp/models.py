@@ -17,6 +17,7 @@ class Project(db.Model):
     short_description = db.Column(db.Text)
     long_description = db.Column(db.Text)
     goal_amount = db.Column(db.Integer)
+    image_filename = db.Column(db.String(200))
     time_starts = db.Column(db.DateTime)
     time_end = db.Column(db.DateTime)
     time_created = db.Column(db.DateTime)
