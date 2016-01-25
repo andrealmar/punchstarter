@@ -1,6 +1,7 @@
 from punchstarterapp import db
 from sqlalchemy.sql import func
 import datetime
+import cloudinary.utils
 
 class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,6 +42,10 @@ class Project(db.Model):
         num_days_left = (self.time_end - now).days
 
         return num_days_left
+
+    @property
+    def image_path(self):
+        return cloudinary.utils.cloudinary_url.(self.image_filename)[0]
 
 class Pledge(db.Model):
     id = db.Column(db.Integer, primary_key=True)
