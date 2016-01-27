@@ -37,6 +37,10 @@ class Project(db.Model):
         return total_pledges
 
     @property
+    def percentage_funded(self):
+        return int(self.total_pledges * 100 / self.goal_amount)
+
+    @property
     def num_days_left(self):
         now = datetime.datetime.now()
         num_days_left = (self.time_end - now).days
