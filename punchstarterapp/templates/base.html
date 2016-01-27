@@ -16,7 +16,21 @@
     <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Punchstarter</a>
       <ul class="right hide-on-med-and-down">
         <li><a href="{{ url_for('create') }}">Create a Project</a></li>
+        <!--search navbar -->
+        <li>
+          <div class="nav-wrapper">
+          <form role="search" action="{{ url_for('search') }}">
+            <div class="input-field">
+              <input id="search" type="search" required placeholder="Search Project" name="q">
+              <label for="search"><i class="material-icons">search</i></label>
+              <i class="material-icons">close</i>
+            </div>
+          </form>
+          </div>
+        </li>
       </ul>
+
+
 
       <ul id="nav-mobile" class="side-nav">
         <li><a href="#">Navbar Link</a></li>
@@ -24,6 +38,8 @@
       <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
     </div>
   </nav>
+
+
 
 {% block content %}
 {% endblock content%}
@@ -66,9 +82,11 @@
   </footer>
 
   <!--  Scripts-->
+
   <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-  <script src="../static/js/materialize.js"></script>
-  <script src="../static/js/init.js"></script>
+  <script src="{{ url_for('static', filename='js/materialize.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/init.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 
   </body>
 </html>
