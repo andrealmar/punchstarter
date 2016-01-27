@@ -3,7 +3,7 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.migrate import Migrate, MigrateCommand
 from flask.ext.script import Manager
 import datetime
-import cloudinary
+import cloudinary.uploader
 
 app = Flask(__name__)
 app.config.from_object('punchstarterapp.default_settings')
@@ -27,7 +27,7 @@ def create():
         #Handle the form submission
         now = datetime.datetime.now()
         time_end = request.form.get("funding_end_date")
-        time_end = datetime.datetime.strptime(time_end, "%Y-%m-%d")
+        time_end = datetime.datetime.strptime(time_end, "%Y-%m-%d") #"%d %B, %g"
 
         #Upload cover photo
         cover_photo = request.files['cover_photo']
@@ -87,3 +87,21 @@ def pledge(project_id):
         db.session.commit()
 
         return redirect(url_for('project_detail', project_id=project.id))
+
+@app.route('/search/')
+def search():
+	query = request.args.get("q") or ""
+	projects = db.session.query(Project).filter(
+		Project.name.ilike('%'+query+'%') |
+		Project.short_description.ilike('%'+query+'%') |
+		Project.long_description.ilike('%'+query+'%')
+	).all()
+	project_count = len(projects)
+
+	query_text = query if query != "" else "all projects"
+
+	return render_template('search.html',
+		query_text=query_text,
+		projects=projects,
+		project_count=project_count
+	)
